@@ -1,1 +1,2 @@
-
+Dependencies:
+Poppler for windows
