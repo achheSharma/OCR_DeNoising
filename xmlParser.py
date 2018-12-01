@@ -25,10 +25,10 @@ def checkDate(inputString):
     return True
 
 def checkErrors(word, n):
-    print(word)
-    correction = spell.correction(word)
-    # print(spell.candidates(correction))
-    if correction != word:
+    # print(word)
+    correction = spell.correction(word.lower())
+    if correction.lower() != word.lower():
+        # print(spell.candidates(correction))
         w = word
         for i in range(n, len(word)):
             if word[i] in trialKeys:
@@ -91,42 +91,50 @@ def parseXML(path, xml):
     dollarFlag = False
     prevChild = None
     
-    for child in root.iter('text'):
-        text = None
-        if child.text:
-            text = child.text
-        # else:
-        #     for b in child:
-        #         text = b.text
-        #         break
-        if not text:
-            continue
-        text = text.split()
-        print(text)
-        for i, t in enumerate(text):
-            # print(t)
-            if t in currency:
+    toEdit = None
+    # for child in root.iter('text'):
+    for page in root:
+        for child in page:
+            if child.tag != 'text':
                 continue
-            elif t == "s" or t == "S":
-                text[i] = "$"
-            elif hasNumbers(t):
-                if ',' in t:
-                    if checkCurr(t):
-                        pass
-                        # print("Currency\n")
-                elif '/' in t:
-                    if checkDate(t):
-                        pass
-                        # print("Date\n")
+            text = None
+            if child.text:
+                text = child.text
+                toEdit = child
             else:
-                correction, correct = spellCheck(t)
-                if correction:
-                    # print("CORRECTION: ", correct)
-                    text[i] = correct
-        child.text = ' '.join(text)
-        prevChild = child
+                for b in child:
+                    text = b.text
+                    toEdit = b
+                    break
+            if not text or text == " ":
+                page.remove(child)
+                continue
+            text = text.split()
+            # print(text)
+            for i, t in enumerate(text):
+                # print(t)
+                if t in currency:
+                    continue
+                elif t == "s" or t == "S":
+                    text[i] = "$"
+                elif hasNumbers(t):
+                    if ',' in t:
+                        if checkCurr(t):
+                            pass
+                            # print("Currency\n")
+                    elif '/' in t:
+                        if checkDate(t):
+                            pass
+                            # print("Date\n")
+                else:
+                    correction, correct = spellCheck(t)
+                    if correction:
+                        # print("CORRECTION: ", correct)
+                        text[i] = correct
+            toEdit.text = ' '.join(text)
+            prevChild = child
             # break
     # os.makedirs("./" + fileName)
     tree.write(path + "new_" + fileName)
 
-# parseXML("XML/A7FZSNDC/", "test.xml")
+parseXML("XML/A7FX7D8H/", "A7FX7D8H.pdf.xml")
