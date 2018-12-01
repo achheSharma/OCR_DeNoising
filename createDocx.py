@@ -19,19 +19,19 @@ def DFS(parent, page_data, fontStyle):
         # if elem.tag == 'b':
         #     return elem.tag, elem.text
         text, fontStyle = DFS(elem, page_data, copy.deepcopy(fontStyle))
+        if not text:
+            text = elem.text
         if elem.tag == 'b':
             fontStyle[0] = True
-            return elem.text, fontStyle
+            return text, fontStyle
         elif elem.tag == 'i':
             fontStyle[1] = True
-            return elem.text, fontStyle
+            return text, fontStyle
         elif elem.tag == 'u':
             fontStyle[2] = True
-            return elem.text, fontStyle
+            return text, fontStyle
 
         if elem.tag == 'text':
-            if not text:
-                text = elem.text
             if not text or text == ' ':
                 continue
             attrib = elem.attrib
@@ -44,7 +44,7 @@ def DFS(parent, page_data, fontStyle):
                 page_data[elem.tag] = [[text, attrib]]
     return None, fontStyle
 
-xml = "XML\\A7H74ZZ6\\A7H74ZZ6.pdf.xml"
+xml = "XML\\A7H74ZZ6\\test.xml"
 tree  = ET.parse(xml)
 root = tree.getroot()
 
@@ -134,5 +134,5 @@ for page in pages:
     
     document.add_page_break()
 
-document.save('demo_A7H74ZZ6.docx')
+document.save('test.docx')
 # check afterwards
