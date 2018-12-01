@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml producer="poppler" version="0.68.0">
+<page number="1" position="absolute" top="0" left="0" height="1189" width="919">
+	<fontspec id="0" size="17" family="Times" color="#000000"/>
+<image top="0" left="0" width="920" height="1189" src="XML/A7FX7D8H/A7FX7D8H.pdf-1_1.png"/>
+<image top="81" left="618" width="275" height="114" src="XML/A7FX7D8H/A7FX7D8H.pdf-1_2.png"/>
+<image top="987" left="510" width="244" height="126" src="XML/A7FX7D8H/A7FX7D8H.pdf-1_3.png"/>
+<text top="310" left="321" width="279" height="18" font="0">IMPRESA MANAGEMENT LLC</text>
+<text top="346" left="342" width="243" height="18" font="0">FINANCIAL STATEMENTS</text>
+<text top="382" left="209" width="39" height="18" font="0">FOR</text>
+<text top="382" left="248" width="43" height="18" font="0"> THE</text>
+<text top="382" left="291" width="5" height="18" font="0"> </text>
+<text top="382" left="296" width="65" height="18" font="0">YEARS</text>
+<text top="382" left="361" width="363" height="18" font="0"> ENDED DECEMBER 31, 2017 AND 2016 </text>
+<text top="418" left="412" width="96" height="18" font="0">(Unaudited)</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1189" width="920">
+	<fontspec id="1" size="11" family="Times" color="#000000"/>
+	<fontspec id="2" size="10" family="Times" color="#000000"/>
+	<fontspec id="3" size="10" family="Times" color="#000000"/>
+	<fontspec id="4" size="13" family="Times" color="#000000"/>
+	<fontspec id="5" size="12" family="Times" color="#000000"/>
+<image top="0" left="0" width="921" height="1190" src="XML/A7FX7D8H/A7FX7D8H.pdf-2_1.png"/>
+<image top="572" left="438" width="298" height="152" src="XML/A7FX7D8H/A7FX7D8H.pdf-2_2.png"/>
+<text top="172" left="359" width="195" height="12" font="1">IMPRESA MANAGEMENT LLC</text>
+<text top="188" left="248" width="95" height="12" font="1">STATEMENTS </text>
+<text top="188" left="343" width="196" height="12" font="1">OF ASSETS, LIABILITIES AND </text>
+<text top="188" left="539" width="128" height="12" font="1">MEMBERS' EQUITY</text>
+<text top="235" left="598" width="59" height="11" font="2"><b>12/31/2017</b></text>
+<text top="235" left="657" width="3" height="11" font="2"><b> </b></text>
+<text top="235" left="721" width="58" height="11" font="2"><b>12/31/2016</b></text>
+<text top="249" left="124" width="34" height="11" font="3">Assets</text>
+<text top="266" left="151" width="27" height="11" font="3">Cash</text>
+<text top="266" left="177" width="22" height="11" font="3"> and</text>
+<text top="266" left="199" width="90" height="11" font="3"> cash equivalents</text>
+<text top="282" left="151" width="44" height="11" font="3">Related </text>
+<text top="282" left="194" width="30" height="11" font="3">parly </text>
+<text top="282" left="225" width="53" height="11" font="3">receivable</text>
+<text top="267" left="553" width="6" height="11" font="3">$</text>
+<text top="266" left="602" width="52" height="11" font="3">5,916,227</text>
+<text top="282" left="603" width="51" height="11" font="3">1,567,968</text>
+<text top="266" left="683" width="6" height="11" font="3">$</text>
+<text top="265" left="734" width="49" height="11" font="3">1,629,021</text>
+<text top="282" left="743" width="42" height="11" font="3">801,590</text>
+<text top="304" left="177" width="65" height="11" font="3">Total Assets</text>
+<text top="305" left="553" width="5" height="11" font="3">$</text>
+<text top="304" left="602" width="52" height="11" font="3">7,484,195</text>
+<text top="304" left="683" width="6" height="11" font="3">$</text>
+<text top="304" left="732" width="51" height="11" font="3">2,430,611</text>
+<text top="344" left="126" width="53" height="11" font="3">Liabilities</text>
+<text top="360" left="151" width="44" height="11" font="3">Related </text>
+<text top="360" left="194" width="70" height="11" font="3">party payable</text>
+<text top="376" left="151" width="95" height="11" font="3">Accrued expenses</text>
+<text top="362" left="552" width="6" height="11" font="3">$</text>
+<text top="360" left="601" width="53" height="11" font="3">7,154,310</text>
+<text top="376" left="619" width="35" height="11" font="3">12,369</text>
+<text top="361" left="682" width="6" height="11" font="3">$</text>
+<text top="360" left="731" width="53" height="11" font="3">2,015,869</text>
+<text top="376" left="749" width="36" height="11" font="3">30,750</text>
+<text top="398" left="176" width="84" height="11" font="3">Total Liabilities</text>
+<text top="398" left="601" width="52" height="11" font="3">7,166,679</text>
+<text top="397" left="731" width="53" height="11" font="3">2,046,619</text>
+<text top="444" left="126" width="50" height="11" font="3">Members</text>
+<text top="444" left="175" width="6" height="11" font="3">’ </text>
+<text top="444" left="181" width="34" height="11" font="3">Equity</text>
+<text top="460" left="152" width="55" height="11" font="3">Members' </text>
+<text top="460" left="207" width="34" height="11" font="3">Equity</text>
+<text top="461" left="552" width="5" height="11" font="3">$</text>
+<text top="460" left="610" width="42" height="11" font="3">317,515</text>
+<text top="460" left="681" width="6" height="11" font="3">$</text>
+<text top="460" left="741" width="42" height="11" font="3">383,992</text>
+<text top="482" left="176" width="27" height="11" font="3">Total</text>
+<text top="482" left="204" width="59" height="11" font="3"> Members' </text>
+<text top="482" left="262" width="33" height="11" font="3">Equity</text>
+<text top="482" left="610" width="42" height="11" font="3">317,515</text>
+<text top="481" left="741" width="42" height="11" font="3">383,992</text>
+<text top="504" left="177" width="27" height="11" font="3">Total</text>
+<text top="504" left="204" width="4" height="11" font="3"> </text>
+<text top="504" left="207" width="79" height="11" font="3">Liabilities and </text>
+<text top="504" left="286" width="88" height="11" font="3">Members' Equity</text>
+<text top="505" left="552" width="5" height="11" font="3">$</text>
+<text top="504" left="600" width="52" height="11" font="3">7,484,195</text>
+<text top="504" left="681" width="6" height="11" font="3">$</text>
+<text top="503" left="731" width="51" height="11" font="3">2,430,611</text>
+<text top="732" left="487" width="31" height="14" font="4">Date</text>
+<text top="732" left="518" width="5" height="13" font="5"> </text>
+<text top="732" left="523" width="67" height="14" font="4">8/24/2018</text>
+<text top="1052" left="451" width="2" height="11" font="3">l</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1190" width="920">
+	<fontspec id="6" size="11" family="Times" color="#000000"/>
+<image top="0" left="0" width="921" height="1190" src="XML/A7FX7D8H/A7FX7D8H.pdf-3_1.png"/>
+<image top="710" left="453" width="375" height="119" src="XML/A7FX7D8H/A7FX7D8H.pdf-3_2.png"/>
+<text top="163" left="346" width="64" height="13" font="5">IMPRESA</text>
+<text top="163" left="410" width="5" height="14" font="4"> </text>
+<text top="163" left="415" width="113" height="14" font="4">MANAGEMENT </text>
+<text top="163" left="528" width="28" height="13" font="5">LLC</text>
+<text top="163" left="556" width="4" height="14" font="4"> </text>
+<text top="180" left="342" width="98" height="13" font="5">STATEMENTS</text>
+<text top="180" left="439" width="5" height="14" font="4"> </text>
+<text top="180" left="444" width="18" height="13" font="5">OF</text>
+<text top="180" left="463" width="4" height="14" font="4"> </text>
+<text top="180" left="467" width="93" height="13" font="5">OPERATIONS</text>
+<text top="247" left="106" width="50" height="11" font="3">Revenue:</text>
+<text top="231" left="611" width="28" height="12" font="6"><b>2017</b></text>
+<text top="265" left="598" width="62" height="11" font="3">34,544,685</text>
+<text top="263" left="696" width="6" height="12" font="6"><b>s</b></text>
+<text top="229" left="746" width="27" height="12" font="6"><b>2016</b></text>
+<text top="263" left="733" width="62" height="11" font="3">30,726,899</text>
+<text top="264" left="132" width="71" height="11" font="3">Management</text>
+<text top="264" left="203" width="44" height="11" font="3"> fee and</text>
+<text top="264" left="246" width="133" height="11" font="3"> expense reimbursement</text>
+<text top="265" left="561" width="6" height="11" font="3">S</text>
+<text top="296" left="132" width="80" height="11" font="3">Total Revenue</text>
+<text top="296" left="598" width="62" height="11" font="3">34,544,685</text>
+<text top="295" left="733" width="61" height="11" font="3">30,726,899</text>
+<text top="337" left="108" width="54" height="11" font="3">Expenses:</text>
+<text top="353" left="133" width="98" height="11" font="3">Secondment costs</text>
+<text top="353" left="231" width="23" height="11" font="3"> and</text>
+<text top="353" left="254" width="4" height="11" font="3"> </text>
+<text top="353" left="257" width="48" height="11" font="3">expense </text>
+<text top="353" left="305" width="86" height="11" font="3">reimbursements</text>
+<text top="353" left="560" width="6" height="11" font="3">$</text>
+<text top="353" left="597" width="62" height="11" font="3">34,612,649</text>
+<text top="352" left="695" width="6" height="11" font="3">$</text>
+<text top="351" left="732" width="61" height="11" font="3">30,723,720</text>
+<text top="370" left="133" width="84" height="11" font="3">Other expenses</text>
+<text top="370" left="622" width="37" height="11" font="3">32.355</text>
+<text top="367" left="750" width="47" height="11" font="3">(33,987)</text>
+<text top="402" left="134" width="29" height="11" font="3">Total</text>
+<text top="402" left="162" width="55" height="11" font="3"> Expenses</text>
+<text top="401" left="597" width="63" height="11" font="3">34,645,004</text>
+<text top="400" left="732" width="61" height="11" font="3">30,689,734</text>
+<text top="434" left="108" width="20" height="11" font="3">Net</text>
+<text top="434" left="128" width="102" height="11" font="3"> Operating Income</text>
+<text top="433" left="608" width="55" height="11" font="3">(100,319)</text>
+<text top="432" left="756" width="37" height="11" font="3">37,166</text>
+<text top="464" left="109" width="107" height="11" font="3">Investment Income:</text>
+<text top="481" left="135" width="157" height="11" font="3">Interest and dividend income</text>
+<text top="481" left="560" width="6" height="11" font="3">$</text>
+<text top="480" left="622" width="37" height="11" font="3">59,850</text>
+<text top="480" left="694" width="6" height="11" font="3">$</text>
+<text top="479" left="773" width="18" height="11" font="3">851</text>
+<text top="497" left="135" width="60" height="11" font="3">Unrealized</text>
+<text top="497" left="194" width="154" height="11" font="3"> GainZ(Loss) on Investments</text>
+<text top="497" left="638" width="21" height="11" font="3">249</text>
+<text top="496" left="786" width="4" height="11" font="3">-</text>
+<text top="514" left="134" width="21" height="11" font="3">Net</text>
+<text top="514" left="154" width="136" height="11" font="3"> realized gain on foreign </text>
+<text top="514" left="291" width="47" height="11" font="3">currency</text>
+<text top="513" left="623" width="36" height="11" font="3">13,980</text>
+<text top="512" left="755" width="38" height="11" font="3">44,442</text>
+<text top="530" left="135" width="41" height="11" font="3">Change</text>
+<text top="530" left="176" width="94" height="11" font="3"> in net unrealized</text>
+<text top="530" left="270" width="4" height="11" font="3"> </text>
+<text top="530" left="274" width="134" height="11" font="3">gain on foreign currency</text>
+<text top="529" left="615" width="47" height="11" font="3">(48,202)</text>
+<text top="529" left="750" width="43" height="11" font="3">140,050</text>
+<text top="561" left="109" width="20" height="11" font="3">Net</text>
+<text top="561" left="130" width="64" height="11" font="3"> Investment</text>
+<text top="561" left="193" width="44" height="11" font="3"> Income</text>
+<text top="560" left="620" width="38" height="11" font="3">25,878</text>
+<text top="560" left="749" width="42" height="11" font="3">185,342</text>
+<text top="593" left="135" width="20" height="11" font="3">Net</text>
+<text top="593" left="155" width="43" height="11" font="3"> Income</text>
+<text top="592" left="556" width="5" height="11" font="3">$</text>
+<text top="592" left="615" width="47" height="11" font="3">(74,441)</text>
+<text top="592" left="690" width="6" height="11" font="3">$</text>
+<text top="591" left="747" width="44" height="11" font="3">222,508</text>
+<text top="626" left="135" width="31" height="11" font="3">Other</text>
+<text top="626" left="166" width="117" height="11" font="3"> Comprehensive Loss</text>
+<text top="625" left="627" width="30" height="11" font="3">7,965</text>
+<text top="624" left="749" width="47" height="11" font="3">(37,750)</text>
+<text top="657" left="135" width="28" height="11" font="3">Total</text>
+<text top="657" left="556" width="6" height="11" font="3">$</text>
+<text top="656" left="615" width="48" height="11" font="3">(66,477)</text>
+<text top="657" left="690" width="6" height="11" font="3">$</text>
+<text top="655" left="749" width="42" height="11" font="3">184,758</text>
+<text top="1068" left="449" width="6" height="11" font="3">2</text>
+</page>
+</pdf2xml>
