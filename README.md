@@ -1,3 +1,4 @@
+## Technical Components  
 Platform Tested  
 • Windows 10  
 Tools  
@@ -8,7 +9,7 @@ Language Libraries
 • python-docx  
 • pyspellchecker  
   
-Files:  
+## Files:  
 1. main.py  
 • Executes poppler to generate xml of respective pdfs present in PDFs forlder  
 • Saves the XML to respective folder in the "XML" folder  
@@ -22,11 +23,11 @@ Files:
 3. words.txt
 • Contains list of words to be excluded from spell checking  
 
-Steps for Execution:   
+## Steps for Execution:   
 • Install all pre requisite tools needed  
 • Place all PDF documents in PDFs folder 
 • Execute main.py  
 
-Results:  
+## Results:  
 • Subfolders with same name as that of file are created in the DOCX directory  
 • This folder holds the generated docx file for each respective PDF provided
