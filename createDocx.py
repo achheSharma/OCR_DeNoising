@@ -1,5 +1,4 @@
 import os
-import copy
 import re
 import string
 
@@ -14,7 +13,7 @@ from spellchecker import SpellChecker
 
 erroneous = {'AH': 'All', 'S': '$', 's': '$'}
 trial = {'l':'t', 'H':'ll'}
-currency = ["$"]
+currency = ["$", "£"]
 
 spell  = SpellChecker()
 spell.word_frequency.load_text_file('./words.txt')
@@ -73,7 +72,10 @@ def spellCheck(word):
     upper = tempWord.isupper()
     word = tempWord
     
-    flag, word = checkErrors(word, 0)
+    try:
+        flag, word = checkErrors(word, 0)
+    except:
+        pass
 
     if title:
         word = word.title()
@@ -112,14 +114,16 @@ pageWidth = None
 leftMargin = None
 def DFS(parent, page_data, fontStyle):
     # global leftMargin
+    text = None
     for elem in parent:
+        fontStyle = [False, False, False]
         if elem.tag == 'fontspec':
             fonts[elem.attrib['id']] = elem.attrib
             continue
 
         # if elem.tag == 'b':
         #     return elem.tag, elem.text
-        text, fontStyle = DFS(elem, page_data, copy.deepcopy(fontStyle))
+        text, fontStyle = DFS(elem, page_data,fontStyle)
         if not text:
             text = elem.text
         if elem.tag == 'b':
@@ -145,7 +149,7 @@ def DFS(parent, page_data, fontStyle):
                 page_data[elem.tag].append([text, attrib])
             else:
                 page_data[elem.tag] = [[text, attrib]]
-    return None, fontStyle
+    return text, fontStyle
 
 def style(run, text, attrib, prevLeft = None):
     # print(text)
@@ -205,7 +209,7 @@ def createDocx(path, fileName):
                 # pp(value)
                 prevLeft = None
                 prevTop = None
-                center = False
+                align = None
                 for item in value:
                     text = item[0]
                     attrib = item[1]
@@ -225,9 +229,11 @@ def createDocx(path, fileName):
                         style(run, text, attrib, prevLeft)
                     if left > 200 and abs(pageWidth - (left + int(attrib['width'])) - int(attrib['left'])) < 50:
                             para_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                            center = True
+                            align = "center"
                     if left > pageWidth/2 and int(attrib['left']) + int(attrib['width']) > pageWidth - 300:
                         para_format.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+                        align = "right"
+                    
                     # else:
                     #     para_format.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
                     prevLeft = int(attrib['left']) + int(attrib['width'])
@@ -248,3 +254,5 @@ def createDocx(path, fileName):
         pass
     document.save("Docx/" + fileName + "/" + fileName + ".docx")
     print("Completed: " + fileName)
+
+# createDocx("XML/S7GZ188P/", "S7GZ188P.pdf.xml")
