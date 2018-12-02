@@ -107,7 +107,11 @@ def parseText(text):
 fonts = {}
 prevTop = None
 fontStyle = [False, False, False] # Bold, Italics, Underline
+pageHeight = None
+pageWidth = None
+leftMargin = None
 def DFS(parent, page_data, fontStyle):
+    # global leftMargin
     for elem in parent:
         if elem.tag == 'fontspec':
             fonts[elem.attrib['id']] = elem.attrib
@@ -135,6 +139,7 @@ def DFS(parent, page_data, fontStyle):
             attrib['b'] = fontStyle[0]
             attrib['i'] = fontStyle[1]
             attrib['u'] = fontStyle[2]
+            # leftMargin = min(leftMargin, int(attrib['left']))
             if elem.tag in page_data:
                 text = parseText(text)
                 page_data[elem.tag].append([text, attrib])
@@ -148,10 +153,9 @@ def style(run, text, attrib, prevLeft = None):
     tab = ""
     if prevLeft:
         diff = abs(int(attrib['left']) - prevLeft)
-        if diff > 50:
-            # print("\tTAB: ", diff)
-            for i in range(int(diff/50)):
-                tab = tab + "\t"
+        # print("\tTAB: ", diff)
+        for i in range(int(diff/50)):
+            tab = tab + "\t"
     run.text = tab + text + " "
     font.name = fonts[attrib['font']]['family']
     font.size = Pt(int(fonts[attrib['font']]['size']))
@@ -165,6 +169,7 @@ def style(run, text, attrib, prevLeft = None):
 # pp(pages)
 
 def createDocx(path, fileName):
+    # global leftMargin
     print("Creating Docx")
     xml = path + fileName
     fileName = fileName[:-8]
@@ -172,16 +177,14 @@ def createDocx(path, fileName):
     root = tree.getroot()
 
     pages = []
-    pageHeight = None
-    pageWidth = None
     for page in root:
         page_data = {}
         fontStyle = [False, False, False]
-        DFS(page, page_data, fontStyle)
-        pages.append(page_data)
         pageHeight = int(page.attrib['height'])
         pageWidth = int(page.attrib['width'])
-        # break
+        leftMargin = pageWidth
+        DFS(page, page_data, fontStyle)
+        pages.append(page_data)
     # pp(pages)
 
     # check image addition code ???
@@ -202,24 +205,29 @@ def createDocx(path, fileName):
                 # pp(value)
                 prevLeft = None
                 prevTop = None
+                center = False
                 for item in value:
                     text = item[0]
                     attrib = item[1]
                     if top != attrib['top']:
+                        center = False
                         top = attrib['top']
                         left = int(attrib['left'])
                         para = document.add_paragraph()
                         para_format = para.paragraph_format
                         if prevTop:
-                            if abs(int(top) - prevTop) < 20:
+                            if abs(int(top) - prevTop) < 25:
                                 para_format.space_after = Pt(0)
                         run = para.add_run()
                         style(run, text, attrib)
                     else:
                         run = para.add_run()
                         style(run, text, attrib, prevLeft)
-                    if left > 200 and abs(pageWidth - (left + int(attrib['width'])) - int(attrib['left'])) < 25:
+                    if left > 200 and abs(pageWidth - (left + int(attrib['width'])) - int(attrib['left'])) < 50:
                             para_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                            center = True
+                    if left > pageWidth/2 and int(attrib['left']) + int(attrib['width']) > pageWidth - 300:
+                        para_format.alignment = WD_ALIGN_PARAGRAPH.RIGHT
                     # else:
                     #     para_format.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
                     prevLeft = int(attrib['left']) + int(attrib['width'])
