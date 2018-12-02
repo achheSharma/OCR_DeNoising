@@ -20,7 +20,7 @@ Language Libraries
 • Performs De-Noising on the textual data  
 • Created Docx as similar to the original PDF in representation as possible  
 
-3. words.txt
+3. words.txt  
 • Contains list of words to be excluded from spell checking  
 
 ## Steps for Execution:   
