@@ -12,9 +12,10 @@ def execute(file):
 
 if __name__ == '__main__':
     process = []
-    max_process = 4
     PDFs = glob("PDFs/" + "*.pdf")
     totalPDFs = len(PDFs)
+    # max_process = totalPDFs/4
+    max_process = totalPDFs
     # print(totalPDFs)
     for i, file in enumerate(PDFs):
         i=i+1
