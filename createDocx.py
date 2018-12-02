@@ -7,12 +7,13 @@ import xml.etree.ElementTree as ET
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Inches, Pt
-from pprintpp import pprint as pp  # pretty print karane ke liye dictionary ko
+from pprintpp import pprint as pp  # pretty print
 
 from spellchecker import SpellChecker
 
-erroneous = {'AH': 'All', 'S': '$', 's': '$'}
+erroneous = {'AH': 'All', 'S': '$', 's': '$', '<E':'(£'}
 trial = {'l':'t', 'H':'ll'}
+numericalErrors = {'O':'0', 'o':'0', 'I':'1', 'l':'1'}
 currency = ["$", "£"]
 
 spell  = SpellChecker()
@@ -21,22 +22,20 @@ spell.word_frequency.load_text_file('./words.txt')
 def hasNumbers(inputString):
     return any(char.isdigit() for char in inputString)
 
-def checkCurr(inputString):
-    inputString = inputString.split(',')
-    for i in inputString:
-        if not i.isdigit():
-            return False
-    return True
-
-def checkDate(inputString):
-    return True
+def correctNums(inputString):
+    outputString = ""
+    for i in range(len(inputString)):
+        if inputString[i] in numericalErrors.keys():
+            outputString = outputString + numericalErrors[inputString[i]]
+        else:
+            outputString = outputString + inputString[i]
+    return outputString
 
 def checkErrors(word, n):
     if word in erroneous.keys():
         return erroneous[word]
     correction = spell.correction(word.lower())
     if correction.lower() != word.lower():
-        # print(spell.candidates(correction))
         w = word
         for i in range(n, len(word)):
             if word[i] in trial.keys():
@@ -85,22 +84,13 @@ def spellCheck(word):
 
 def parseText(text):
     text = text.split()
-    # print(text)
     for i, t in enumerate(text):
-        # print(t)
         if t in currency:
             continue
         elif t in erroneous.keys():
             text[i] = erroneous[t]
         elif hasNumbers(t):
-            if ',' in t:
-                if checkCurr(t):
-                    pass
-                    # print("Currency\n")
-            elif '/' in t:
-                if checkDate(t):
-                    pass
-                    # print("Date\n")
+            text[i] = correctNums(t)
         else:
             text[i] = spellCheck(t)
     text = ' '.join(text)
@@ -120,9 +110,6 @@ def DFS(parent, page_data, fontStyle):
         if elem.tag == 'fontspec':
             fonts[elem.attrib['id']] = elem.attrib
             continue
-
-        # if elem.tag == 'b':
-        #     return elem.tag, elem.text
         text, fontStyle = DFS(elem, page_data,fontStyle)
         if not text:
             text = elem.text
@@ -152,12 +139,10 @@ def DFS(parent, page_data, fontStyle):
     return text, fontStyle
 
 def style(run, text, attrib, prevLeft = None):
-    # print(text)
     font = run.font
     tab = ""
     if prevLeft:
         diff = abs(int(attrib['left']) - prevLeft)
-        # print("\tTAB: ", diff)
         for i in range(int(diff/50)):
             tab = tab + "\t"
     run.text = tab + text + " "
@@ -174,7 +159,7 @@ def style(run, text, attrib, prevLeft = None):
 
 def createDocx(path, fileName):
     # global leftMargin
-    print("Creating Docx")
+    # print("Creating Docx")
     xml = path + fileName
     fileName = fileName[:-8]
     tree  = ET.parse(xml)
@@ -189,14 +174,10 @@ def createDocx(path, fileName):
         leftMargin = pageWidth
         DFS(page, page_data, fontStyle)
         pages.append(page_data)
-    # pp(pages)
-
-    # check image addition code ???
-    # https://stackoverflow.com/questions/32932230/add-an-image-in-a-specific-position-in-the-document-docx-with-python
-    # loop structure inconsistent
 
     document = Document()
 
+    count = 0
     for page in pages:
         top = None
         for key, value in page.items():
@@ -233,26 +214,15 @@ def createDocx(path, fileName):
                     if left > pageWidth/2 and int(attrib['left']) + int(attrib['width']) > pageWidth - 300:
                         para_format.alignment = WD_ALIGN_PARAGRAPH.RIGHT
                         align = "right"
-                    
-                    # else:
-                    #     para_format.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+
                     prevLeft = int(attrib['left']) + int(attrib['width'])
                     prevTop = int(attrib['top']) + int(attrib['height'])
-            
-            # if key == 'image':
-            #     for item in value:
-            #         attrib = item[1]
-            #         img = attrib['src']
-            #         mtch = re.match(r'_1.png',img) # avoid first image of complete page
-            #         if(img):
-            #             document.add_picture(img)            
-        
-        document.add_page_break()
+        count = count+1
+        if count < len(pages):
+            document.add_page_break()
     try:
         os.makedirs("Docx/" + fileName)
     except:
         pass
     document.save("Docx/" + fileName + "/" + fileName + ".docx")
-    print("Completed: " + fileName)
-
-# createDocx("XML/S7GZ188P/", "S7GZ188P.pdf.xml")
+    # print("Completed: " + fileName)
