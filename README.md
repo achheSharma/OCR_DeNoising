@@ -25,7 +25,7 @@ Language Libraries
 
 ## Steps for Execution:   
 • Install all pre requisite tools needed  
-• Place all PDF documents in PDFs folder 
+• Place all PDF documents in PDFs folder  
 • Execute main.py  
 
 ## Results:  
