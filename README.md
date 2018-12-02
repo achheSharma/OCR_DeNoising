@@ -2,7 +2,7 @@ Platform Tested
 • Windows 10  
 Tools  
 • Poppler for Windows  
-• Python
+• Python  
 Language Libraries  
 • elementtree  
 • python-docx  
@@ -27,6 +27,6 @@ Steps for Execution:
 • Place all PDF documents in PDFs folder 
 • Execute main.py  
 
-Results:
+Results:  
 • Subfolders with same name as that of file are created in the DOCX directory  
-• This folder holds the generated docx file of the 
+• This folder holds the generated docx file for each respective PDF provided
