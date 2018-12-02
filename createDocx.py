@@ -1,28 +1,106 @@
+"""
+This script contains the main logic to convert document
+from parsed xml file which is created from poppler library for text extraction.
+
+The complete conversion process involves following steps in this script:
+    
+    * parsing xml document in the form of xml tree from ElementTree.
+    
+    * This parsed document is read in DFS manner, OCR denoising techniques
+      are applied onto it and stored in list structure containing nested dictionaries
+      to store data in key-value pair for fast accessing of data.
+      Note: For constructing this resultant data structure some minor changes are
+            done to xml while executing DFS function.
+    
+    * This resultant data structure is then used to construct word document.
+      
+Techniques used for OCR Denoising:
+    
+    * SpellChecker for detection of wrong words and their conversion to correct ones 
+      with most probable substitute word trial dictionary specified below.
+    
+    * A list of most common character conversion errors in words as well as digits.
+    
+    * Maintaining a list of noun words to be omitted from check and correction matching
+      purposes.
+
+Current denoising techniques can be made better with adding more such common errors, trials and
+list of nouns that won't be checked against spelling checker.
+
+This script contains the following functions:
+    
+    * hasNumbers - check if the passed string containing any digits or not.
+    * correctNums - for correcting most common digits related issues with poppler
+                    library keeping current use case in consideration.
+    * checkErrors - Recursively substitute characters in a word for checking 
+                    against most plausable correct words with calculation of 
+                    Jaccard distance logic.
+    * spellCheck - It extract given word by removing starting and terminating
+                   punctuations from a given word parsed from parseText.
+    * parseText - It parses passed text onto other methods for OCR denoising process.
+    * style - paragraph styling in docx specifying styling attributes like bold, italics,
+              underline, font family and size extraction.
+    * DFS - It iterates over complete xml tree constructed in a depth first manner for
+            creating storing data structure for creation of word document.
+    * createDocx - Main logic for converting given list data structure into a docx.
+
+"""
+
 import os
 import re
 import string
-
 import xml.etree.ElementTree as ET
-
+# for this import of module install python docx library
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Inches, Pt
-from pprintpp import pprint as pp  # pretty print
-
+# for this import of module install pyspellchecker library
 from spellchecker import SpellChecker
 
+
+# OCR denoising techniques
 erroneous = {'AH': 'All', 'S': '$', 's': '$', '<E':'(£'}
-trial = {'l':'t', 'H':'ll'}
+trial = {'l':'t', 'H':'ll', }
 numericalErrors = {'O':'0', 'o':'0', 'I':'1', 'l':'1'}
 currency = ["$", "£"]
-
+# Pyspellchecker for suggesting alternate correct words
+# with minimum Jaccard distance of alternate suggested or current word.
 spell  = SpellChecker()
+# List of nouns to be omitteed from SpellChecker module and
+# assumed to be correct and compared against only 'words.txt' file.
 spell.word_frequency.load_text_file('./words.txt')
 
 def hasNumbers(inputString):
+    """
+    This function checks if inputted string contains digits or not.
+    
+    Parameters
+    ----------
+    inputString : str
+        input string to be checked.
+        
+    Returns
+    -------
+    boolean
+        either True or False depending upon digits passed.
+    """
     return any(char.isdigit() for char in inputString)
 
 def correctNums(inputString):
+    """
+    This function checks for frequent errors in digits
+    and given suitable changes accordingly.
+    
+    Parameters
+    ----------
+    inputString : str
+        input string to be checked.
+
+    Returns
+    -------
+    str
+        returns correct word
+    """
     outputString = ""
     for i in range(len(inputString)):
         if inputString[i] in numericalErrors.keys():
@@ -32,6 +110,28 @@ def correctNums(inputString):
     return outputString
 
 def checkErrors(word, n):
+    """
+    This is a recursive function checks if the current word is meaningful
+    otherwise it substitute most probable misread individual characters with
+    suitable correction characters in recursive manner. 
+    
+    Suitable correct word is returned with minimum Jaccard distance from
+    existing vocabulary of correct words.
+    
+    Parameters
+    ----------
+    word : str
+        input string for given word to be checked.
+    n : int
+        the character that will be changed in that particular call.
+        
+    Returns
+    -------
+    boolean
+        either True or False depending upon new word has error or not.
+    str
+        suitable corrected or original word.            
+    """
     if word in erroneous.keys():
         return erroneous[word]
     correction = spell.correction(word.lower())
@@ -50,6 +150,20 @@ def checkErrors(word, n):
     return False, word
 
 def spellCheck(word):
+    """
+    It extract given word by removing starting and terminating
+    punctuations from a given word parsed from parseText.
+    
+    Parameters
+    ----------
+    word : str
+        input string for given word to be checked.
+    
+    Returns
+    -------
+    str
+        correct word with complete punctuations returned.
+    """
     tempWord = word
     startPunc = ""
     for i in range(len(word)):
@@ -83,6 +197,21 @@ def spellCheck(word):
     return startPunc + word + endPunc
 
 def parseText(text):
+    """
+    It parses passed text onto other methods for OCR denoising process.
+    first it splits the text passed and checks its spelling with spellCheck
+    and checkErrors functions.
+
+    Parameters
+    ----------
+    text : str
+        input string containing multiple words.
+    
+    Returns
+    -------
+    text
+        correct words with complete punctuations returned.
+    """
     text = text.split()
     for i, t in enumerate(text):
         if t in currency:
@@ -96,14 +225,38 @@ def parseText(text):
     text = ' '.join(text)
     return text
 
+# Parameters for storing docx related information from given xml.
 fonts = {}
 prevTop = None
 fontStyle = [False, False, False] # Bold, Italics, Underline
 pageHeight = None
 pageWidth = None
 leftMargin = None
+
 def DFS(parent, page_data, fontStyle):
-    # global leftMargin
+    """
+    It iterates over complete xml tree constructed in a depth first manner for
+    creating storing data structure for creation of word document.
+    
+    Parameters
+    ----------
+    parent : object of tree
+        parent of given node.
+    page_data : dictionary
+        key-value pair information about attributes and data as key
+        of particular page.
+    fontStyle : list
+        different styles of font either bold, italics or underline.
+    
+    
+    Returns
+    -------
+    str
+        text returned as string of every object.
+    list
+        list of size three of different font styles.
+    """
+    
     text = None
     for elem in parent:
         fontStyle = [False, False, False]
@@ -139,6 +292,22 @@ def DFS(parent, page_data, fontStyle):
     return text, fontStyle
 
 def style(run, text, attrib, prevLeft = None):
+    """
+    paragraph styling in docx specifying styling attributes like bold, italics,
+    underline, font family and size extraction.
+    
+    Parameters
+    ----------
+    run : function
+        function that formats data on the fly as data is passed.
+    text : str
+        text passed as input for being inserted along with given style.
+    attrib : dictionary
+        storing all the styles of the text that is passed.
+    prevLeft : int
+        numeric value for tab prediction and calculation in current running paragraph.
+    """
+    
     font = run.font
     tab = ""
     if prevLeft:
@@ -155,11 +324,25 @@ def style(run, text, attrib, prevLeft = None):
     if 'u' in attrib.keys():
         font.underline = attrib['u']
 
-# pp(pages)
+
 
 def createDocx(path, fileName):
-    # global leftMargin
-    # print("Creating Docx")
+    """
+    Main logic for converting given list data structure into a docx.
+    
+    For conversion page is selected from given created data structure.
+    Line by line text is inserted in sorted manner in top-down and
+    left-right manner. Correction functions, tab insertion logic are
+    also called from this function.
+    
+    Parameters
+    ----------
+    path : str
+        xml file's path that is to be passed for conversion.
+    fileName : str
+        name of file to be passed.
+    """
+
     xml = path + fileName
     fileName = fileName[:-8]
     tree  = ET.parse(xml)
@@ -187,7 +370,6 @@ def createDocx(path, fileName):
                     if abs(int(value[i][1]['top']) - int(value[i+1][1]['top'])) <= 5:
                         value[i+1][1]['top'] = value[i][1]['top']
                 value.sort(key = lambda x: (int(x[1]['top']), int(x[1]['left'])))
-                # pp(value)
                 prevLeft = None
                 prevTop = None
                 align = None
@@ -225,4 +407,3 @@ def createDocx(path, fileName):
     except:
         pass
     document.save("Docx/" + fileName + "/" + fileName + ".docx")
-    # print("Completed: " + fileName)
