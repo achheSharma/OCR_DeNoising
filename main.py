@@ -8,7 +8,7 @@ in word document from flattened scanned PDF files.
 This scripts accepts PDF documents in given specified directory namely 'PDFs/'
 
 It requires poppler utility library to be installed on your machine,
-createDocx script which is further dependent on other modules
+create_docx script which is further dependent on other modules
 like docx, spellchecker. Refer README.md for installation instruction.
 
 This script contains following functions:
@@ -19,7 +19,7 @@ This script contains following functions:
 
 import os
 from glob import glob
-import createDocx
+import create_docx
 import multiprocessing as mp
 import time
 
@@ -38,8 +38,8 @@ def execute(file):
     dir = file[:-4]
     os.system("pdftohtml -c -hidden -xml " + "PDFs/" + file + " " + "XML/" + dir + "/" + file + ".xml")
     path = "XML/" + dir + "/"
-    # call to createDocx script for docx conversion format for output.
-    createDocx.createDocx(path, file + ".xml")
+    # call to create_docx script for docx conversion format for output.
+    create_docx.create_docx(path, file + ".xml")
 
 if __name__ == '__main__':
     """
@@ -60,7 +60,7 @@ if __name__ == '__main__':
     for i, file in enumerate(PDFs):
         i=i+1
         print(i, ": ", file)
-        file = file.split("\\")[-1]
+        file = file.split("/")[-1]    # Use backward slash for linux OR '\\' for windows for retrieving path details
         try:
             os.makedirs("XML/" + file[:-4])
         except:
@@ -80,3 +80,5 @@ if __name__ == '__main__':
         process[j].start()
     for j in range(len(process)):
         process[j].join()
+        
+        

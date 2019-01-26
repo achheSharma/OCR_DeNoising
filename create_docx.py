@@ -42,7 +42,7 @@ This script contains the following functions:
               underline, font family and size extraction.
     * DFS - It iterates over complete xml tree constructed in a depth first manner for
             creating storing data structure for creation of word document.
-    * createDocx - Main logic for converting given list data structure into a docx.
+    * create_docx - Main logic for converting given list data structure into a docx.
 
 """
 
@@ -60,7 +60,7 @@ from spellchecker import SpellChecker
 
 # OCR denoising techniques
 erroneous = {'AH': 'All', 'S': '$', 's': '$', '<E':'(£'}
-trial = {'l':'t', 'H':'ll', }
+trial = {'l':'t', 'H':'ll' }
 numericalErrors = {'O':'0', 'o':'0', 'I':'1', 'l':'1'}
 currency = ["$", "£"]
 # Pyspellchecker for suggesting alternate correct words
@@ -326,7 +326,7 @@ def style(run, text, attrib, prevLeft = None):
 
 
 
-def createDocx(path, fileName):
+def create_docx(path, fileName):
     """
     Main logic for converting given list data structure into a docx.
     
