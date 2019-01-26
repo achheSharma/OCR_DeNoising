@@ -2,7 +2,9 @@
 
 This repository contains python 3.6.x scripts for OCR task for digitalized PDF docs. It uses PDF redering library poppler for converting PDF files to DOCx files via intermiate XML file generation. Our claim, It gives better result that OOB Tesseract for digitized PDF documents.
 
-Few example files are also uploaded on which intial tests were carried out along with their `words.txt` file which contains lists of some `nouns` that are present in sample test file. Ref. features for more details.
+Few example files are also uploaded on which intial tests were carried out along with their `words.txt` file which contains lists of some `nouns` that are present in sample test file. Refer feature section for more details.
+
+Also, it doesn't handle OCR reading from images which Tesseract can do and very good at.
 
 # How to Run 
 
@@ -58,4 +60,4 @@ This is the manual part, it has been left manual. So, that best results can be a
   
 | Example 1 | Example 2 | Example 3 |
 |   :---:   |   :---:   |   :---:   |
-| ![Example 1](_assets/1.png) | ![Example 2](_assets/2.png) | ![Example 3](_assets/3.png) |
+| ![Example 1](_assets/1.png) | ![Example 2](_assets/2.png) | ![Example 3   ](_assets/3.png) |
