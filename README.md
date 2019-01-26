@@ -42,7 +42,7 @@ Also, it doesn't handle OCR reading from images which Tesseract can do and very 
 * Make currrent directory as your `pwd` and then type following command ` sudo docker build -t ocrtest:1.0 . ` for executing given Dockerfile. 
 * After every dependency is downloaded. Check that your given image exists with `docker images` command.
 * Then run your given image with `docker run -i -t IMAGE_ID(NUMERIC)` command.
-* Bash shell for given image will start with all the pre-requisites installed.
+* Bash shell for given image will start with all the pre-requisites installed. Change to `OCR_DeNoising` directory and run `python3 main.py` command to execute the software scripts.
 
 # Important Features
 
